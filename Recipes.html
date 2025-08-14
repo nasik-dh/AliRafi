@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes | Seazon AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="recipes.css">
+    <link rel="icon" href="https://i.pinimg.com/736x/31/7b/28/317b2808626bfecee69caf9cbc90bcb2.jpg">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Side Navigation -->
+        <nav class="side-nav">
+            <div class="nav-header">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Seazon AI</span>
+                </div>
+                <button class="nav-toggle" id="navToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="nav-links">
+                <a href="chat.html" class="nav-link">
+                    <i class="fas fa-comment"></i>
+                    <span>Chat</span>
+                </a>
+                <a href="SeasonalTips.html" class="nav-link">
+                    <i class="fas fa-calendar"></i>
+                    <span>Seasonal Tips</span>
+                </a>
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-book"></i>
+                    <span>Recipes</span>
+                    <span class="badge" id="newRecipesBadge">5</span>
+                </a>
+                <a href="saved-recipes.html" class="nav-link">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Saved Recipes</span>
+                </a>
+                <a href="Settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="user-avatar.png" alt="User">
+                </div>
+                <div class="user-info">
+                    <span class="username">Alex Johnson</span>
+                    <span class="user-email">alex@example.com</span>
+                </div>
+                <button id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="recipeSearch" placeholder="Search recipes...">
+                    <button id="voiceSearchBtn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                </div>
+                
+                <div class="header-actions">
+                    <button id="themeToggle" class="icon-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="filterBtn" class="btn">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                    <button id="shoppingListBtn" class="btn">
+                        <i class="fas fa-shopping-basket"></i> Shopping List
+                    </button>
+                </div>
+            </header>
+            
+            <div class="seasonal-banner animate__animated animate__fadeIn">
+                <div class="banner-content">
+                    <h2>Summer Recipes Collection</h2>
+                    <p>Discover fresh, seasonal ingredients at their peak flavor this summer</p>
+                    <button class="btn">Explore Summer Recipes</button>
+                </div>
+            </div>
+            
+            <div class="recipes-container">
+                <div class="filters-panel" id="filtersPanel">
+                    <div class="filter-header">
+                        <h3>Filter Recipes</h3>
+                        <button id="closeFiltersBtn" class="icon-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Season</h3>
+                        <div class="season-buttons">
+                            <button class="season-btn active" data-season="all">All</button>
+                            <button class="season-btn" data-season="spring">
+                                <i class="fas fa-seedling"></i> Spring
+                            </button>
+                            <button class="season-btn" data-season="summer">
+                                <i class="fas fa-sun"></i> Summer
+                            </button>
+                            <button class="season-btn" data-season="autumn">
+                                <i class="fas fa-leaf"></i> Autumn
+                            </button>
+                            <button class="season-btn" data-season="winter">
+                                <i class="fas fa-snowflake"></i> Winter
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Dietary Preferences</h3>
+                        <div class="dietary-options">
+                            <div class="dietary-tag" data-dietary="vegetarian">
+                                <i class="fas fa-carrot"></i> Vegetarian
+                            </div>
+                            <div class="dietary-tag" data-dietary="vegan">
+                                <i class="fas fa-leaf"></i> Vegan
+                            </div>
+                            <div class="dietary-tag" data-dietary="gluten-free">
+                                <i class="fas fa-bread-slice"></i> Gluten-Free
+                            </div>
+                            <div class="dietary-tag" data-dietary="dairy-free">
+                                <i class="fas fa-cheese"></i> Dairy-Free
+                            </div>
+                            <div class="dietary-tag" data-dietary="nut-free">
+                                <i class="fas fa-peanut"></i> Nut-Free
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Meal Type</h3>
+                        <div class="meal-options">
+                            <div class="meal-tag active" data-meal="breakfast">
+                                <i class="fas fa-egg"></i> Breakfast
+                            </div>
+                            <div class="meal-tag active" data-meal="lunch">
+                                <i class="fas fa-utensils"></i> Lunch
+                            </div>
+                            <div class="meal-tag active" data-meal="dinner">
+                                <i class="fas fa-drumstick-bite"></i> Dinner
+                            </div>
+                            <div class="meal-tag active" data-meal="dessert">
+                                <i class="fas fa-ice-cream"></i> Dessert
+                            </div>
+                            <div class="meal-tag active" data-meal="snack">
+                                <i class="fas fa-apple-alt"></i> Snack
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Cooking Time</h3>
+                        <div class="time-slider">
+                            <input type="range" id="timeFilter" min="0" max="120" value="60">
+                            <div class="time-labels">
+                                <span>0-30 min</span>
+                                <span id="timeFilterValue">≤ 60 min</span>
+                                <span>120+ min</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button id="resetFiltersBtn" class="btn btn-outline">Reset</button>
+                        <button id="applyFiltersBtn" class="btn">Apply Filters</button>
+                    </div>
+                </div>
+                
+                <div class="recipes-grid" id="recipesGrid">
+                    <!-- Recipe cards will be dynamically loaded here -->
+                    <div class="recipe-card animate__animated animate__fadeIn">
+                        <div class="recipe-card-header">
+                            <span class="season-badge summer">
+                                <i class="fas fa-sun"></i> Summer
+                            </span>
+                            <button class="save-recipe-btn">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="recipe-card-image">
+                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Summer Salad">
+                            <div class="quick-info">
+                                <span><i class="fas fa-clock"></i> 25 min</span>
+                                <span><i class="fas fa-signal"></i> Easy</span>
+                            </div>
+                        </div>
+                        <div class="recipe-card-body">
+                            <h3>Summer Berry Salad</h3>
+                            <p>Fresh mixed greens with seasonal berries, goat cheese, and balsamic glaze</p>
+                            <div class="dietary-tags">
+                                <span class="vegetarian"><i class="fas fa-carrot"></i></span>
+                                <span class="gluten-free"><i class="fas fa-bread-slice"></i></span>
+                            </div>
+                        </div>
+                        <button class="view-recipe-btn">View Recipe</button>
+                    </div>
+                    
+                    <!-- More recipe cards will be added dynamically -->
+                </div>
+                
+                <div class="load-more">
+                    <button id="loadMoreBtn" class="btn btn-outline">
+                        <i class="fas fa-plus"></i> Load More Recipes
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Recipe Detail Modal -->
+    <div class="modal" id="recipeModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="recipe-detail">
+                <div class="recipe-header">
+                    <div class="recipe-title">
+                        <h2 id="recipeTitle">Summer Berry Salad</h2>
+                        <div class="recipe-actions">
+                            <button class="icon-btn" id="printRecipeBtn" title="Print Recipe">
+                                <i class="fas fa-print"></i>
+                            </button>
+                            <button class="icon-btn" id="shareRecipeBtn" title="Share Recipe">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="icon-btn active" id="saveRecipeBtn" title="Save Recipe">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="recipe-meta">
+                        <span id="recipeSeason" class="summer"><i class="fas fa-sun"></i> Summer</span>
+                        <span id="recipeTime"><i class="fas fa-clock"></i> 25 minutes</span>
+                        <span id="recipeDifficulty"><i class="fas fa-signal"></i> Easy</span>
+                        <span id="recipeServings"><i class="fas fa-users"></i> Serves 4</span>
+                    </div>
+                    <div class="dietary-tags">
+                        <span class="vegetarian"><i class="fas fa-carrot"></i> Vegetarian</span>
+                        <span class="gluten-free"><i class="fas fa-bread-slice"></i> Gluten-Free</span>
+                    </div>
+                </div>
+                
+                <div class="recipe-content">
+                    <div class="recipe-image">
+                        <img id="recipeImage" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Summer Berry Salad">
+                    </div>
+                    
+                    <div class="recipe-details">
+                        <div class="ingredients-section">
+                            <h3><i class="fas fa-carrot"></i> Ingredients</h3>
+                            <ul id="ingredientsList">
+                                <li>4 cups mixed greens (spinach, arugula, lettuce)</li>
+                                <li>1 cup fresh strawberries, sliced</li>
+                                <li>1/2 cup fresh blueberries</li>
+                                <li>1/2 cup fresh raspberries</li>
+                                <li>1/4 cup crumbled goat cheese</li>
+                                <li>1/4 cup sliced almonds</li>
+                                <li>2 tbsp balsamic glaze</li>
+                                <li>2 tbsp olive oil</li>
+                                <li>Salt and pepper to taste</li>
+                            </ul>
+                            <button class="btn" id="addToShoppingListBtn">
+                                <i class="fas fa-plus"></i> Add to Shopping List
+                            </button>
+                        </div>
+                        
+                        <div class="instructions-section">
+                            <h3><i class="fas fa-list-ol"></i> Instructions</h3>
+                            <ol id="instructionsList">
+                                <li>Wash and dry all greens and berries thoroughly.</li>
+                                <li>In a large bowl, combine the mixed greens with the sliced strawberries, blueberries, and raspberries.</li>
+                                <li>Sprinkle the crumbled goat cheese and sliced almonds over the top.</li>
+                                <li>In a small bowl, whisk together the olive oil, balsamic glaze, salt, and pepper.</li>
+                                <li>Drizzle the dressing over the salad just before serving and toss gently to combine.</li>
+                                <li>Serve immediately and enjoy this refreshing summer dish!</li>
+                            </ol>
+                            
+                            <div class="nutrition-info">
+                                <h3><i class="fas fa-chart-pie"></i> Nutrition Information</h3>
+                                <div class="nutrition-facts">
+                                    <div class="nutrition-item">
+                                        <span class="nutrition-value">250</span>
+                                        <span class="nutrition-label">Calories</span>
+                                    </div>
+                                    <div class="nutrition-item">
+                                        <span class="nutrition-value">18g</span>
+                                        <span class="nutrition-label">Fat</span>
+                                    </div>
+                                    <div class="nutrition-item">
+                                        <span class="nutrition-value">22g</span>
+                                        <span class="nutrition-label">Carbs</span>
+                                    </div>
+                                    <div class="nutrition-item">
+                                        <span class="nutrition-value">5g</span>
+                                        <span class="nutrition-label">Protein</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-footer">
+                    <div class="recipe-notes">
+                        <h3><i class="fas fa-lightbulb"></i> Chef's Notes</h3>
+                        <p>For a vegan version, substitute the goat cheese with avocado slices or vegan cheese. You can also add grilled chicken or salmon for extra protein.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping List Modal -->
+    <div class="modal" id="shoppingListModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="shopping-list">
+                <h2><i class="fas fa-shopping-basket"></i> My Shopping List</h2>
+                <div class="list-actions">
+                    <button id="clearListBtn" class="btn btn-outline">
+                        <i class="fas fa-trash"></i> Clear List
+                    </button>
+                    <button id="sendListBtn" class="btn">
+                        <i class="fas fa-paper-plane"></i> Send to Phone
+                    </button>
+                </div>
+                
+                <div class="list-categories">
+                    <div class="category">
+                        <h3>Produce</h3>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="item1">
+                                <label for="item1">Mixed greens (spinach, arugula, lettuce)</label>
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="item2">
+                                <label for="item2">Fresh strawberries</label>
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="item3">
+                                <label for="item3">Blueberries</label>
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category">
+                        <h3>Dairy</h3>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="item4">
+                                <label for="item4">Goat cheese</label>
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="category">
+                        <h3>Pantry</h3>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="item5">
+                                <label for="item5">Sliced almonds</label>
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="item6">
+                                <label for="item6">Balsamic glaze</label>
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="item7">
+                                <label for="item7">Olive oil</label>
+                                <button class="remove-item"><i class="fas fa-times"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="add-item">
+                    <input type="text" id="newListItem" placeholder="Add new item...">
+                    <button id="addItemBtn" class="btn">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Search Modal -->
+    <div class="modal" id="voiceSearchModal">
+        <div class="modal-content small-modal">
+            <span class="close-modal">&times;</span>
+            <div class="voice-search">
+                <div class="voice-icon animate__animated animate__pulse">
+                    <i class="fas fa-microphone"></i>
+                </div>
+                <h3>Listening...</h3>
+                <p>Say something like "Show me quick vegetarian summer recipes"</p>
+                <button id="stopListeningBtn" class="btn">
+                    <i class="fas fa-stop"></i> Stop Listening
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="recipes.js"></script>
+</body>
+</html>
