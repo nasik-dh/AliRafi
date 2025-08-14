@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seazon AI Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://i.pinimg.com/736x/31/7b/28/317b2808626bfecee69caf9cbc90bcb2.jpg">
+</head>
+<body class="spring"> <!-- Change class to spring/summer/autumn/winter -->
+    <div class="seasonal-container">
+        <!-- Animated background elements -->
+        <div class="seasonal-bg">
+            <div class="bg-elements">
+                <div class="bg-element leaf-1"></div>
+                <div class="bg-element leaf-2"></div>
+                <div class="bg-element leaf-3"></div>
+                <div class="bg-element fruit-1"></div>
+                <div class="bg-element fruit-2"></div>
+            </div>
+        </div>
+        
+        <!-- Language selector -->
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="it">Italiano</option>
+            </select>
+        </div>
+        
+        <!-- Main card content -->
+        <div class="seasonal-card animate__animated animate__fadeIn">
+            <div class="season-icon animate__animated animate__bounceIn">
+                <i class="fas fa-seedling"></i> <!-- Icon changes with season -->
+            </div>
+            
+            <h1 class="animate__animated animate__fadeInUp">Welcome to Seazon AI</h1>
+            <p class="season-subtitle animate__animated animate__fadeInUp animate__delay-1s">Smart recipes tailored for every season</p>
+            <p class="season-description animate__animated animate__fadeInUp animate__delay-1s">
+                Our AI-powered platform helps you discover the perfect Seazon recipes, 
+                meal plans, and cooking tips based on fresh, in-season ingredients. 
+                Get personalized recommendations that change with the seasons.
+            </p>
+            
+            <div class="cta-buttons animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="signin.html" class="season-btn primary-btn">
+                    <i class="fas fa-arrow-right"></i> Get Started
+                </a>
+                <a href="demo.html" class="season-btn secondary-btn">
+                    <i class="fas fa-play-circle"></i> Watch Demo
+                </a>
+            </div>
+            
+            <!-- Seazon features -->
+            <div class="season-features animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Seazon Recipes</h3>
+                    <p>Fresh ideas for every time of year</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered</h3>
+                    <p>Smart recommendations just for you</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="feature-title">Healthy Choices</h3>
+                    <p>Nutrition-focused meal planning</p>
+                </div>
+            </div>
+            
+            <!-- Seazon testimonial -->
+            <div class="testimonial animate__animated animate__fadeIn animate__delay-3s">
+                <div class="testimonial-content">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Seazon AI has transformed how I cook! The recipes are perfectly timed with what's fresh at my local market.</p>
+                    <div class="testimonial-author">
+                        <img src="https://dqdhdc.netlify.app/pic/1000.jpg" alt="Sarah J.">
+                        <div>
+                            <h4>Ali Rafi.</h4>
+                            <span>Food Blogger</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- App download badges -->
+            <div class="download-badges animate__animated animate__fadeInUp animate__delay-3s">
+                <p>Get our mobile app:</p>
+                <div class="badges">
+                    <a href="#" class="app-badge">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store">
+                    </a>
+                    <a href="#" class="app-badge">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seazon footer -->
+        <footer class="seasonal-footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">How It Works</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <p class="copyright">© 2023 Seazon AI. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
