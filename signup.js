@@ -137,7 +137,7 @@
                 localStorage.setItem('seazonai-authenticated', 'true');
                 
                 // Redirect to main app
-                window.location.href = '../index.html';
+                window.location.href = '../chat.html';
             });
             
             // Social login buttons
@@ -148,4 +148,5 @@
             document.querySelector('.apple-btn').addEventListener('click', function() {
                 alert('Apple login would be implemented here');
             });
+
         });
