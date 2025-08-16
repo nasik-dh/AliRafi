@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seasonal AI Demo</title>
+    <title>Seazon AI Demo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,14 @@
     <link rel="icon" href="https://i.pinimg.com/736x/31/7b/28/317b2808626bfecee69caf9cbc90bcb2.jpg">
 </head>
 <body class="spring">
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader">
+            <i class="fas fa-leaf spinning"></i>
+            <p>Loading Seazon AI...</p>
+        </div>
+    </div>
+
     <div class="demo-container">
         <!-- Navigation -->
         <nav class="demo-nav">
@@ -20,14 +28,22 @@
                 <i class="fas fa-arrow-left"></i> Back
             </a>
             <div class="demo-logo">
-                <i class="fas fa-leaf"></i> Seasonal AI
+                <i class="fas fa-leaf"></i> Seazon AI
+            </div>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-sun"></i>
             </div>
         </nav>
 
         <!-- Demo hero section -->
         <section class="demo-hero">
             <div class="hero-content">
-                <h1 class="animate__animated animate__fadeInUp">See Seasonal AI in Action</h1>
+                <h1 class="animate__animated animate__fadeInUp">See Seazon AI in Action</h1>
                 <p class="animate__animated animate__fadeInUp animate__delay-1s">Discover how our AI creates perfect seasonal meal plans tailored just for you</p>
                 <div class="hero-video animate__animated animate__fadeInUp animate__delay-2s">
                     <div class="video-placeholder">
@@ -79,39 +95,161 @@
             </div>
         </section>
 
+        <!-- Testimonials Section -->
+        <section class="demo-testimonials">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Seazon AI has completely changed the way I cook. The recipes are amazing and I love knowing I'm using the freshest ingredients."</p>
+                    <div class="user-info">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Alex R.">
+                        <span>- Alex R.</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"I'm saving so much money on groceries and my family has never eaten better. Highly recommend!"</p>
+                    <div class="user-info">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jordan P.">
+                        <span>- Jordan P.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seasonal Calendar Section -->
+        <section class="demo-calendar">
+            <h2>What's in Season Now?</h2>
+            <div class="calendar-container">
+                <div class="season-item">
+                    <div class="season-icon">
+                        <i class="fas fa-carrot"></i>
+                    </div>
+                    <span>Carrots</span>
+                    <div class="season-progress" data-percent="90"></div>
+                </div>
+                <div class="season-item">
+                    <div class="season-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <span>Apples</span>
+                    <div class="season-progress" data-percent="75"></div>
+                </div>
+                <div class="season-item">
+                    <div class="season-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <span>Spinach</span>
+                    <div class="season-progress" data-percent="85"></div>
+                </div>
+                <div class="season-item">
+                    <div class="season-icon">
+                        <i class="fas fa-pepper-hot"></i>
+                    </div>
+                    <span>Peppers</span>
+                    <div class="season-progress" data-percent="60"></div>
+                </div>
+            </div>
+            <button id="viewMoreBtn" class="view-more-btn">View Full Seasonal Calendar <i class="fas fa-arrow-right"></i></button>
+        </section>
+
+        <!-- Recipe of the Day Section -->
+        <section class="recipe-of-day">
+            <h2>Recipe of the Day</h2>
+            <div class="recipe-card">
+                <div class="recipe-image">
+                    <img src="https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Seasonal Salad">
+                    <div class="recipe-badge">Chef's Pick</div>
+                </div>
+                <div class="recipe-details">
+                    <h3>Spring Vegetable Salad</h3>
+                    <div class="recipe-meta">
+                        <span><i class="fas fa-clock"></i> 25 mins</span>
+                        <span><i class="fas fa-utensils"></i> 4 servings</span>
+                        <span><i class="fas fa-fire"></i> 320 cal</span>
+                    </div>
+                    <p>A refreshing mix of seasonal greens, radishes, and asparagus with a lemon-honey dressing.</p>
+                    <div class="recipe-tags">
+                        <span class="tag vegan">Vegan</span>
+                        <span class="tag gluten-free">Gluten Free</span>
+                        <span class="tag quick">Quick</span>
+                    </div>
+                    <button class="recipe-btn">View Recipe <i class="fas fa-book-open"></i></button>
+                </div>
+            </div>
+        </section>
+
         <!-- Demo CTA -->
         <section class="demo-cta">
-            <h2>Ready to Transform Your Cooking?</h2>
-            <p>Join thousands of happy users enjoying fresh, seasonal meals every day</p>
-            <div class="cta-buttons">
-                <a href="signin.html" class="cta-btn primary-btn">
-                    <i class="fas fa-user-plus"></i> Sign Up Now
-                </a>
-                <a href="index.html" class="cta-btn secondary-btn">
-                    <i class="fas fa-home"></i> Back to Home
-                </a>
+            <div class="cta-content">
+                <h2>Ready to Transform Your Cooking?</h2>
+                <p>Join thousands of happy users enjoying fresh, seasonal meals every day</p>
+                <div class="cta-buttons">
+                    <a href="signin.html" class="cta-btn primary-btn">
+                        <i class="fas fa-user-plus"></i> Sign Up Now
+                    </a>
+                    <a href="index.html" class="cta-btn secondary-btn">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                </div>
             </div>
         </section>
 
         <!-- Footer -->
         <footer class="demo-footer">
             <div class="footer-content">
-                <div class="footer-links">
-                    <a href="#">About</a>
-                    <a href="#">Features</a>
-                    <a href="#">Pricing</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Blog</a>
+                <div class="footer-newsletter">
+                    <h3>Get Seasonal Tips</h3>
+                    <p>Subscribe to our newsletter for monthly seasonal recipes and cooking tips</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+                    </form>
                 </div>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Press</a>
+                    </div>
+                    <div class="link-column">
+                        <h4>Resources</h4>
+                        <a href="#">Blog</a>
+                        <a href="#">Seasonal Guide</a>
+                        <a href="#">Help Center</a>
+                    </div>
+                    <div class="link-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Cookies</a>
+                    </div>
                 </div>
             </div>
-            <p class="copyright">© 2023 Seasonal AI. All rights reserved.</p>
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a>
+                    <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.tiktok.com"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <p class="copyright">© 2025 Seazon AI. All rights reserved.</p>
+            </div>
         </footer>
     </div>
 
@@ -122,6 +260,11 @@
             <iframe id="demoVideo" width="100%" height="500" src="https://www.youtube.com/embed/9GJ6XeBVC0A?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="demo.js"></script>
