@@ -3,103 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Season AI Chat</title>
-    <link rel="stylesheet" href="chat.css">
+    <title>Seazon AI | Your Seasonal Assistant</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="chat.css">
+
+  
 </head>
-<body>
+<body data-theme="light" data-season="spring">
+    <div class="background-animation"></div>
+    
+    <!-- Seasonal effects container -->
+    <div id="seasonEffects"></div>
+    
     <div class="app-container">
-        <header class="app-header">
-            <div class="logo-container">
-                <div class="logo-icon" id="season-logo">
-                    <i class="fas fa-leaf spring-icon"></i>
-                    <i class="fas fa-sun summer-icon"></i>
-                    <i class="fas fa-tree fall-icon"></i>
-                    <i class="fas fa-snowflake winter-icon"></i>
+        <!-- Enhanced Side Navigation -->
+        <nav class="side-nav" id="sideNav">
+            <div class="nav-header">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Seazon AI</span>
                 </div>
-                <h1>Season AI <span class="version">2.0</span></h1>
-            </div>
-            <div class="header-controls">
-                <div class="season-indicator">
-                    <span id="current-season">Loading season...</span>
-                    <div class="season-progress" id="season-progress">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
+                <button class="nav-toggle" id="navToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
-        </header>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-section="chat">
+                    <i class="fas fa-comment"></i>
+                    <span>Chat</span>
+                </a>
+                <a href="SeasonalTips.html" class="nav-link" data-section="seasonal-tips">
+                    <i class="fas fa-calendar"></i>
+                    <span>Seasonal Tips</span>
+                </a>
+                <a href="Recipes.html" class="nav-link" data-section="recipes">
+                    <i class="fas fa-book"></i>
+                    <span>Recipes</span>
+                </a>
+                <a href="Garden.html" class="nav-link" data-section="garden">
+                    <i class="fas fa-seedling"></i>
+                    <span>Garden Guide</span>
+                </a>
+                <a href="Wheather.html" class="nav-link" data-section="weather">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>Weather</span>
+                </a>
+                <a href="Settings.html" class="nav-link" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar" id="userAvatar">
+                    <span>AJ</span>
+                </div>
+                <div class="user-info">
+                    <span class="username">Alex Johnson</span>
+                    <span class="user-email">alex@example.com</span>
+                </div>
+                <button id="logoutBtn" title="Sign out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </nav>
         
-        <div class="chat-container">
-            <div class="chat-messages" id="chat-messages">
-                <div class="welcome-message">
-                    <div class="message-content">
-                        <p>Welcome to Season AI Chat 2.0! 🌸☀️🍂❄️</p>
-                        <p>I'll adapt my personality and knowledge based on the current season.</p>
-                        <div class="message-actions">
-                            <button class="quick-reply" data-reply="What's special about this season?">Season info</button>
-                            <button class="quick-reply" data-reply="What should I do this season?">Activities</button>
-                            <button class="quick-reply" data-reply="How's the weather?">Weather</button>
+        <!-- Enhanced Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1 id="pageTitle">Seasonal Assistant</h1>
+                <div class="header-actions">
+                    <button id="seasonToggle" title="Change season theme">
+                        <i class="fas fa-leaf"></i> <span id="seasonText">Spring</span>
+                    </button>
+                    <button id="themeToggle" title="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="weatherBtn" title="Show weather">
+                        <i class="fas fa-cloud-sun"></i>
+                    </button>
+                    <button id="newChatBtn" title="Start new chat">
+                        <i class="fas fa-plus"></i> New Chat
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Weather Widget -->
+            <div class="weather-widget" id="weatherWidget">
+                <div class="weather-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="weatherLocation">Loading...</span>
+                    <button style="margin-left: auto; background: none; border: none; cursor: pointer;" onclick="toggleWeather()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="weather-temp" id="weatherTemp">--°</div>
+                <div id="weatherDesc">Loading weather...</div>
+                <div id="weatherDetails" class="weather-details" style="margin-top: 10px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div><i class="fas fa-wind"></i> Wind: <span id="weatherWind">-- km/h</span></div>
+                    <div><i class="fas fa-tint"></i> Humidity: <span id="weatherHumidity">--%</span></div>
+                </div>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-box" id="chatBox">
+                    <div class="welcome-message">
+                        <div class="ai-avatar">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="message-content">
+                            <h3>Welcome to Seazon AI!</h3>
+                            <p>I'm your seasonal assistant, here to help with recipes, gardening tips, and seasonal activities based on your location and preferences.</p>
+                            <div class="quick-actions">
+                                <button class="quick-btn" data-prompt="What's in season this month?">
+                                    <i class="fas fa-calendar-week"></i> Seasonal Produce
+                                </button>
+                                <button class="quick-btn" data-prompt="Suggest a healthy recipe for today">
+                                    <i class="fas fa-utensils"></i> Recipe Ideas
+                                </button>
+                                <button class="quick-btn" data-prompt="What should I plant in my garden now?">
+                                    <i class="fas fa-seedling"></i> Gardening Tips
+                                </button>
+                                <button class="quick-btn" data-prompt="Plan seasonal activities for this weekend">
+                                    <i class="fas fa-hiking"></i> Activities
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="message-time">Just now</div>
+                </div>
+                
+                <div class="input-container">
+                    <div class="input-area">
+                        <button id="attachBtn" title="Attach files">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <input type="text" id="userInput" placeholder="Ask Seazon AI about seasonal topics..." autocomplete="off">
+                        <button id="voiceButton" title="Voice input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button id="sendButton" title="Send message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="typing-indicator" id="typingIndicator">
+                        <span>Seazon AI is thinking...</span>
+                        <div class="dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="input-area">
-                <div class="input-controls">
-                    <button class="input-button" id="voice-button">
-                        <i class="fas fa-microphone"></i>
-                    </button>
-                    <button class="input-button" id="attach-button">
-                        <i class="fas fa-paperclip"></i>
-                    </button>
-                </div>
-                <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off">
-                <button id="send-button"><i class="fas fa-paper-plane"></i></button>
-            </div>
-            
-            <div class="typing-indicator" id="typing-indicator">
-                <div class="typing-dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-                <span>Season AI is typing...</span>
-            </div>
-        </div>
-        
-        <div class="modal" id="attachments-modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Send Attachment</h3>
-                    <button class="close-modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <button class="attachment-option">
-                        <i class="fas fa-camera"></i>
-                        <span>Photo</span>
-                    </button>
-                    <button class="attachment-option">
-                        <i class="fas fa-video"></i>
-                        <span>Video</span>
-                    </button>
-                    <button class="attachment-option">
-                        <i class="fas fa-file"></i>
-                        <span>Document</span>
-                    </button>
-                    <button class="attachment-option">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Location</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="chat.js"></script>
+  
 </body>
 </html>
