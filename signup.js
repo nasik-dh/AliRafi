@@ -148,5 +148,4 @@
             document.querySelector('.apple-btn').addEventListener('click', function() {
                 alert('Apple login would be implemented here');
             });
-
         });

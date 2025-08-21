@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seazon AI | Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="https://i.pinimg.com/736x/31/7b/28/317b2808626bfecee69caf9cbc90bcb2.jpg">
+    <link rel="stylesheet" href="signin.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Seazon AI</span>
+                </div>
+                <h2>Welcome Back</h2>
+                <p>Sign in to continue your seasonal journey</p>
+            </div>
+            
+            <form id="signinForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div id="emailError" class="error-message">Please enter a valid email</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                    <div id="passwordError" class="error-message">Password must be at least 8 characters</div>
+                    <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="auth-btn" id="submitBtn">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+                
+                <div class="auth-footer">
+                    <p>New to Seazon AI? <a href="signup.html">Create an account</a></p>
+                </div>
+            </form>
+            
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+            
+            <div class="social-auth">
+                <div class="social-icons">
+                    <button type="button" class="social-btn google" id="googleSignIn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn apple" id="appleSignIn">
+                        <i class="fab fa-apple"></i> Apple
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="seasonal-tip">
+            <i class="fas fa-lightbulb"></i>
+            <p>Did you know? <span id="seasonTip"></span></p>
+        </div>
+    </div>
+    
+    <script src="signin.js"></script>
+  
+</body>
+</html>

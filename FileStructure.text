@@ -1,0 +1,11 @@
+seazon-ai/
+├── index.html          (Main app)
+├── auth/
+│   ├── signin.html     (Sign in)
+│   ├── signup.html     (Sign up)
+│   └── auth.css        (Auth styles)
+├── css/
+│   └── style.css       (Main styles)
+├── js/
+│   └── script.js       (Main JavaScript)
+└── assets/             (For images/icons)
