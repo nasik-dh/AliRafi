@@ -8,7 +8,6 @@
     <link rel="icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="chat.css">
-
   
 </head>
 <body data-theme="light" data-season="spring">
@@ -16,6 +15,12 @@
     
     <!-- Seasonal effects container -->
     <div id="seasonEffects"></div>
+    
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Operation completed successfully</span>
+    </div>
     
     <div class="app-container">
         <!-- Enhanced Side Navigation -->
@@ -101,10 +106,15 @@
                     </button>
                 </div>
                 <div class="weather-temp" id="weatherTemp">--°</div>
-                <div id="weatherDesc">Loading weather...</div>
+                <div id="weatherDesc" class="weather-desc">Loading weather...</div>
                 <div id="weatherDetails" class="weather-details" style="margin-top: 10px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
                     <div><i class="fas fa-wind"></i> Wind: <span id="weatherWind">-- km/h</span></div>
                     <div><i class="fas fa-tint"></i> Humidity: <span id="weatherHumidity">--%</span></div>
+                    <div><i class="fas fa-compress-alt"></i> Pressure: <span id="weatherPressure">-- hPa</span></div>
+                    <div><i class="fas fa-eye"></i> Visibility: <span id="weatherVisibility">-- km</span></div>
+                </div>
+                <div class="weather-forecast" id="weatherForecast">
+                    <!-- Forecast will be populated by JS -->
                 </div>
             </div>
             
@@ -170,7 +180,6 @@
     <script src="voice.js"></script>
     <script src="sw.js"></script>
     <script src=".js"></script>
-  
+
 </body>
 </html>
-
