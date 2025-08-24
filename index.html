@@ -3,142 +3,738 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seazon AI Welcome</title>
+    <title>Seazon AI - Welcome</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: #4e54c8;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #4e54c8; /* Fallback for browsers that don't support gradient text */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #4e54c8;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4e54c8;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .signin-btn {
+            background: transparent;
+            color: #4e54c8;
+            border: 2px solid #4e54c8;
+        }
+
+        .signin-btn:hover {
+            background: rgba(78, 84, 200, 0.1);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(78, 84, 200, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4e54c8;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #2c3e50 0%, #4e54c8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #2c3e50; /* Fallback */
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(78, 84, 200, 0.4);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: #4e54c8;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 2px solid #4e54c8;
+            transition: all 0.3s;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(78, 84, 200, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 28px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            text-align: center;
+        }
+
+        .ai-demo {
+            width: 80%;
+            max-width: 800px;
+            height: 400px;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .ai-demo::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            animation: shine 5s infinite linear;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .ai-demo h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        .ai-demo p {
+            max-width: 500px;
+            margin: 0 auto;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #4e54c8;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .auth-btn {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                gap: 15px;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .ai-demo {
+                height: 300px;
+                width: 90%;
+            }
+            
+            .ai-demo h3 {
+                font-size: 1.5rem;
+            }
+            
+            .ai-demo p {
+                font-size: 0.9rem;
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .ai-demo {
+                height: 250px;
+            }
+        }
+
+        /* Animation for elements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body class="spring"> <!-- Change class to spring/summer/autumn/winter -->
-    <div class="seasonal-container">
-        <!-- Animated background elements -->
-        <div class="seasonal-bg">
-            <div class="bg-elements">
-                <div class="bg-element leaf-1"></div>
-                <div class="bg-element leaf-2"></div>
-                <div class="bg-element leaf-3"></div>
-                <div class="bg-element fruit-1"></div>
-                <div class="bg-element fruit-2"></div>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                <div class="logo-text">Seazon AI</div>
             </div>
-        </div>
-        
-        <!-- Language selector -->
-        <div class="language-selector">
-            <select id="languageSelect">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="it">Italiano</option>
-            </select>
-        </div>
-        
-        <!-- Main card content -->
-        <div class="seasonal-card animate__animated animate__fadeIn">
-            <div class="season-icon animate__animated animate__bounceIn">
-                <i class="fas fa-seedling"></i> <!-- Icon changes with season -->
-            </div>
-            
-            <h1 class="animate__animated animate__fadeInUp">Welcome to Seazon AI</h1>
-            <p class="season-subtitle animate__animated animate__fadeInUp animate__delay-1s">Smart recipes tailored for every season</p>
-            <p class="season-description animate__animated animate__fadeInUp animate__delay-1s">
-                Our AI-powered platform helps you discover the perfect Seazon recipes, 
-                meal plans, and cooking tips based on fresh, in-season ingredients. 
-                Get personalized recommendations that change with the seasons.
-            </p>
-            
-            <div class="cta-buttons animate__animated animate__fadeInUp animate__delay-2s">
-                <a href="signin.html" class="season-btn primary-btn">
-                    <i class="fas fa-arrow-right"></i> Get Started
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Solutions</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="signin.html" class="auth-btn signin-btn">
+                    <i class="fas fa-user"></i> Sign In
                 </a>
-                <a href="demo.html" class="season-btn secondary-btn">
-                    <i class="fas fa-play-circle"></i> Watch Demo
+                <a href="signup.html" class="auth-btn signup-btn">
+                    <i class="fas fa-user-plus"></i> Sign Up
                 </a>
             </div>
-            
-            <!-- Seazon features -->
-            <div class="season-features animate__animated animate__fadeInUp animate__delay-2s">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h3 class="feature-title">Seazon Recipes</h3>
-                    <p>Fresh ideas for every time of year</p>
-                </div>
-                
-                <div class="feature-card">
+        </div>           
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">Intelligent Solutions for the Digital Age</h1>
+            <p class="fade-in">Seazon AI leverages cutting-edge artificial intelligence to transform your business processes, enhance decision-making, and unlock new opportunities for growth.</p>
+            <div class="hero-buttons">
+                <a href="solutions.html" class="primary-btn fade-in">Explore Solutions</a>
+                <a href="demo.html" class="secondary-btn fade-in">Watch Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Why Choose Seazon AI</h2>
+                <p>Our platform offers powerful features designed to meet the needs of modern businesses</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3 class="feature-title">AI-Powered</h3>
-                    <p>Smart recommendations just for you</p>
+                    <h3>Smart Automation</h3>
+                    <p>Streamline your workflows with AI-powered automation that learns and adapts to your business needs.</p>
                 </div>
-                
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="feature-title">Healthy Choices</h3>
-                    <p>Nutrition-focused meal planning</p>
+                    <h3>Predictive Analytics</h3>
+                    <p>Gain valuable insights from your data with our advanced predictive modeling and analysis tools.</p>
                 </div>
-            </div>
-            
-            <!-- Seazon testimonial -->
-            <div class="testimonial animate__animated animate__fadeIn animate__delay-3s">
-                <div class="testimonial-content">
-                    <i class="fas fa-quote-left"></i>
-                    <p>Seazon AI has transformed how I cook! The recipes are perfectly timed with what's fresh at my local market.</p>
-                    <div class="testimonial-author">
-                        <img src="https://dqdhdc.netlify.app/pic/1000.jpg" alt="Sarah J.">
-                        <div>
-                            <h4>Ali Rafi.</h4>
-                            <span>Food Blogger</span>
-                        </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                </div>
-            </div>
-            
-            <!-- App download badges -->
-            <div class="download-badges animate__animated animate__fadeInUp animate__delay-3s">
-                <p>Get our mobile app:</p>
-                <div class="badges">
-                    <a href="#" class="app-badge">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store">
-                    </a>
-                    <a href="#" class="app-badge">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play">
-                    </a>
+                    <h3>Enhanced Security</h3>
+                    <p>Protect your sensitive data with our state-of-the-art security features and compliance protocols.</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Seazon footer -->
-        <footer class="seasonal-footer">
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Experience Seazon AI</h2>
+                <p>See how our platform can transform your business operations</p>
+            </div>
+            <div class="ai-demo fade-in">
+                <h3>AI-Powered Business Intelligence</h3>
+                <p>Click to see our AI analyze data in real-time, providing actionable insights and recommendations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
             <div class="footer-content">
-                <div class="footer-links">
-                    <a href="#">About Us</a>
-                    <a href="#">How It Works</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact</a>
+                <div class="footer-column">
+                    <h3>Seazon AI</h3>
+                    <p>Transforming businesses through the power of artificial intelligence and machine learning.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                <div class="footer-column">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#">Business Intelligence</a></li>
+                        <li><a href="#">Process Automation</a></li>
+                        <li><a href="#">Predictive Analytics</a></li>
+                        <li><a href="#">Customer Insights</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Get In Touch</h3>
+                    <p>Email: info@seazonai.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Address: 123 AI Boulevard, Tech City</p>
                 </div>
             </div>
-            <p class="copyright">© 2023 Seazon AI. All rights reserved.</p>
-        </footer>
-    </div>
+            <div class="copyright">
+                <p>&copy; 2023 Seazon AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('#nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Fade-in animation for elements
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const isVisible = (elementTop < window.innerHeight - 50) && (elementBottom > 0);
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initial check
+        window.addEventListener('load', checkFade);
+        // Check on scroll
+        window.addEventListener('scroll', checkFade);
+
+        // Demo section interaction
+        const demoSection = document.querySelector('.ai-demo');
+        demoSection.addEventListener('click', function() {
+            // Save original content
+            const originalHTML = this.innerHTML;
+            
+            // Show loading state
+            this.innerHTML = `
+                <h3>Analyzing Data Patterns...</h3>
+                <p>Our AI is now processing complex datasets to identify trends and opportunities specific to your business.</p>
+                <div style="margin-top: 30px; font-size: 3rem;">
+                    <i class="fas fa-cog fa-spin"></i>
+                </div>
+            `;
+            
+            // Show results after delay
+            setTimeout(() => {
+                this.innerHTML = `
+                    <h3>Analysis Complete!</h3>
+                    <p>We've identified 3 key opportunities to improve efficiency and 2 potential areas for growth in your business.</p>
+                    <div style="margin-top: 30px; font-size: 3rem;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                `;
+                
+                // Return to original after another delay
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                }, 5000);
+            }, 3000);
+        });
+    </script>
 </body>
-
 </html>
