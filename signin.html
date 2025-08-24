@@ -3,76 +3,1105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seazon AI | Sign In</title>
+    <title>Seazon AI - Sign In</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="logo.png">
-    <link rel="stylesheet" href="signin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles - Consistent with main site */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: #4e54c8;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #4e54c8;
+            text-decoration: none;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .home-btn {
+            background: transparent;
+            color: #4e54c8;
+            border: 2px solid #4e54c8;
+        }
+
+        .home-btn:hover {
+            background: rgba(78, 84, 200, 0.1);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(78, 84, 200, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4e54c8;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .signin-main {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signin-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1000px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .signin-info {
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            padding: 50px 40px;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signin-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(45deg) translateX(-100%); }
+            50% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .info-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .info-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .features-list i {
+            width: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Sign In Form */
+        .signin-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .signin-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .signin-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .signin-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+
+        .alert-success {
+            background: #f0fff4;
+            color: #2f855a;
+            border: 1px solid #9ae6b4;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4e54c8;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.1);
+        }
+
+        .form-input.valid {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+
+        .form-input.invalid {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: #4e54c8;
+        }
+
+        .validation-message {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .validation-message.error {
+            color: #dc3545;
+            display: block;
+        }
+
+        .validation-message.success {
+            color: #28a745;
+            display: block;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #4e54c8;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #4e54c8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .forgot-password:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .signin-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .signin-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 84, 200, 0.4);
+        }
+
+        .signin-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e5e9;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .social-signin {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .google-btn:hover {
+            border-color: #db4437;
+            color: #db4437;
+        }
+
+        .linkedin-btn:hover {
+            border-color: #0077b5;
+            color: #0077b5;
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: #4e54c8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #4e54c8;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .auth-btn {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-buttons {
+                display: none;
+            }
+
+            .signin-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .signin-info {
+                order: 2;
+                padding: 30px 25px;
+            }
+
+            .signin-card {
+                padding: 40px 25px;
+            }
+
+            .signin-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .social-signin {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .signin-main {
+                padding: 100px 0 40px;
+            }
+
+            .signin-card {
+                padding: 30px 20px;
+            }
+
+            .signin-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .info-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <div class="logo">
-                    <i class="fas fa-leaf"></i>
-                    <span>Seazon AI</span>
-                </div>
-                <h2>Welcome Back</h2>
-                <p>Sign in to continue your seasonal journey</p>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                <a href="index.html" class="logo-text">Seazon AI</a>
             </div>
-            
-            <form id="signinForm">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" placeholder="Enter your email" required>
-                    </div>
-                    <div id="emailError" class="error-message">Please enter a valid email</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Enter your password" required>
-                    </div>
-                    <div id="passwordError" class="error-message">Password must be at least 8 characters</div>
-                    <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
-                </div>
-                
-                <button type="submit" class="auth-btn" id="submitBtn">
-                    <i class="fas fa-sign-in-alt"></i> Sign In
-                </button>
-                
-                <div class="auth-footer">
-                    <p>New to Seazon AI? <a href="signup.html">Create an account</a></p>
-                </div>
-            </form>
-            
-            <div class="divider">
-                <span>or continue with</span>
-            </div>
-            
-            <div class="social-auth">
-                <div class="social-icons">
-                    <button type="button" class="social-btn google" id="googleSignIn">
-                        <i class="fab fa-google"></i> Google
-                    </button>
-                    <button type="button" class="social-btn apple" id="appleSignIn">
-                        <i class="fab fa-apple"></i> Apple
-                    </button>
-                </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="auth-buttons">
+                <a href="index.html" class="auth-btn home-btn">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="signup.html" class="auth-btn signup-btn">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
             </div>
         </div>
-        
-        <div class="seasonal-tip">
-            <i class="fas fa-lightbulb"></i>
-            <p>Did you know? <span id="seasonTip"></span></p>
-        </div>
-    </div>
-    
-    <script src="signin.js"></script>
-  
-</body>
+    </header>
 
+    <!-- Main Content -->
+    <main class="signin-main">
+        <div class="container">
+            <div class="signin-wrapper">
+                <!-- Information Panel -->
+                <div class="signin-info fade-in">
+                    <div class="info-content">
+                        <h2>Welcome Back!</h2>
+                        <p>Sign in to access your personalized AI-powered dashboard and continue transforming your business with intelligent solutions.</p>
+                        <ul class="features-list">
+                            <li><i class="fas fa-chart-line"></i> Advanced Analytics Dashboard</li>
+                            <li><i class="fas fa-robot"></i> Smart Automation Tools</li>
+                            <li><i class="fas fa-shield-alt"></i> Enterprise-Grade Security</li>
+                            <li><i class="fas fa-headset"></i> 24/7 Expert Support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sign In Form -->
+                <div class="signin-card fade-in">
+                    <div class="signin-header">
+                        <h1>Sign In</h1>
+                        <p>Enter your credentials to access your account</p>
+                    </div>
+
+                    <div class="alert alert-error" id="errorAlert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="errorMessage"></span>
+                    </div>
+
+                    <div class="alert alert-success" id="successAlert">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="successMessage"></span>
+                    </div>
+
+                    <form id="signinForm" novalidate>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <div class="input-wrapper">
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input"
+                                    placeholder="you@company.com"
+                                    autocomplete="email"
+                                    required
+                                    aria-describedby="emailError"
+                                >
+                            </div>
+                            <div id="emailError" class="validation-message"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-input"
+                                    placeholder="Enter your password"
+                                    autocomplete="current-password"
+                                    required
+                                    minlength="6"
+                                    aria-describedby="passwordError"
+                                >
+                                <span class="password-toggle" id="passwordToggle">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <div id="passwordError" class="validation-message"></div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe" name="rememberMe">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-password" id="forgotPassword">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="signin-btn" id="signinButton">
+                            <span id="buttonText">Sign In</span>
+                            <div class="loading-spinner" id="loadingSpinner"></div>
+                        </button>
+                    </form>
+
+                    <div class="divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <div class="social-signin">
+                        <a href="#" class="social-btn google-btn" id="googleSignin">
+                            <i class="fab fa-google" style="color: #db4437;"></i>
+                            Google
+                        </a>
+                        <a href="#" class="social-btn linkedin-btn" id="linkedinSignin">
+                            <i class="fab fa-linkedin-in" style="color: #0077b5;"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+
+                    <div class="signup-link">
+                        Don't have an account? <a href="signup.html">Create one here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Seazon AI</h3>
+                    <p>Transforming businesses through the power of artificial intelligence and machine learning.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#">Business Intelligence</a></li>
+                        <li><a href="#">Process Automation</a></li>
+                        <li><a href="#">Predictive Analytics</a></li>
+                        <li><a href="#">Customer Insights</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Get In Touch</h3>
+                    <p>Email: info@seazonai.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Address: 123 AI Boulevard, Tech City</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Seazon AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const signinForm = document.getElementById('signinForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const passwordToggle = document.getElementById('passwordToggle');
+        const signinButton = document.getElementById('signinButton');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorAlert = document.getElementById('errorAlert');
+        const successAlert = document.getElementById('successAlert');
+        const forgotPassword = document.getElementById('forgotPassword');
+        const rememberMeCheckbox = document.getElementById('rememberMe');
+
+        // Validation Functions
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        // Show/Hide Alerts
+        function showError(message) {
+            document.getElementById('errorMessage').textContent = message;
+            errorAlert.classList.add('show');
+            successAlert.classList.remove('show');
+            setTimeout(() => errorAlert.classList.remove('show'), 5000);
+        }
+
+        function showSuccess(message) {
+            document.getElementById('successMessage').textContent = message;
+            successAlert.classList.add('show');
+            errorAlert.classList.remove('show');
+        }
+
+        // Field Validation
+        function validateField(input, validationFn, errorElementId, errorMsg, successMsg) {
+            const value = input.value.trim();
+            const errorElement = document.getElementById(errorElementId);
+            
+            if (value === '') {
+                input.classList.remove('valid', 'invalid');
+                errorElement.classList.remove('error', 'success');
+                return false;
+            }
+            
+            if (validationFn(value)) {
+                input.classList.remove('invalid');
+                input.classList.add('valid');
+                errorElement.textContent = successMsg;
+                errorElement.classList.remove('error');
+                errorElement.classList.add('success');
+                return true;
+            } else {
+                input.classList.remove('valid');
+                input.classList.add('invalid');
+                errorElement.textContent = errorMsg;
+                errorElement.classList.remove('success');
+                errorElement.classList.add('error');
+                return false;
+            }
+        }
+
+        // Password Toggle
+        passwordToggle.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+
+        // Real-time Validation
+        emailInput.addEventListener('blur', function() {
+            validateField(
+                this,
+                validateEmail,
+                'emailError',
+                'Please enter a valid email address',
+                'Valid email address'
+            );
+        });
+
+        passwordInput.addEventListener('blur', function() {
+            validateField(
+                this,
+                validatePassword,
+                'passwordError',
+                'Password must be at least 6 characters long',
+                'Password looks good'
+            );
+        });
+
+        // Clear validation on focus
+        [emailInput, passwordInput].forEach(input => {
+            input.addEventListener('focus', function() {
+                this.classList.remove('valid', 'invalid');
+                const errorId = this.id + 'Error';
+                document.getElementById(errorId).classList.remove('error', 'success');
+            });
+        });
+
+        // Form Submission
+        signinForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            // Validate all fields
+            const isEmailValid = validateField(
+                emailInput,
+                validateEmail,
+                'emailError',
+                'Please enter a valid email address',
+                'Valid email address'
+            );
+            
+            const isPasswordValid = validateField(
+                passwordInput,
+                validatePassword,
+                'passwordError',
+                'Password must be at least 6 characters long',
+                'Password looks good'
+            );
+            
+            if (!email || !password) {
+                showError('Please fill in all required fields');
+                return;
+            }
+            
+            if (!isEmailValid || !isPasswordValid) {
+                showError('Please correct the errors above');
+                return;
+            }
+            
+            // Show loading state
+            signinButton.disabled = true;
+            buttonText.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+            
+            // Simulate API call
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Demo credentials check
+                if (email === 'demo@seazonai.com' && password === 'demo123') {
+                    showSuccess('Sign in successful! Redirecting to dashboard...');
+                    
+                    // Save credentials if remember me is checked
+                    if (rememberMeCheckbox.checked) {
+                        localStorage.setItem('rememberedEmail', email);
+                        localStorage.setItem('rememberMe', 'true');
+                    } else {
+                        localStorage.removeItem('rememberedEmail');
+                        localStorage.removeItem('rememberMe');
+                    }
+                    
+                    // Simulate redirect
+                    setTimeout(() => {
+                        window.location.href = 'index.html'; // Change to dashboard.html when available
+                    }, 2000);
+                } else {
+                    showError('Invalid email or password. Try demo@seazonai.com / demo123 for demo');
+                }
+            } catch (error) {
+                showError('Something went wrong. Please try again.');
+            } finally {
+                // Reset button state
+                signinButton.disabled = false;
+                buttonText.style.display = 'block';
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Forgot Password
+        forgotPassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            if (!email) {
+                showError('Please enter your email address first');
+                emailInput.focus();
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showError('Please enter a valid email address');
+                emailInput.focus();
+                return;
+            }
+            
+            showSuccess('Password reset link has been sent to your email address');
+        });
+
+        // Social Sign-in (Demo)
+        document.getElementById('googleSignin').addEventListener('click', function(e) {
+            e.preventDefault();
+            showSuccess('Redirecting to Google Sign-in...');
+            setTimeout(() => {
+                showError('Google Sign-in is not configured in this demo');
+            }, 1500);
+        });
+
+        document.getElementById('linkedinSignin').addEventListener('click', function(e) {
+            e.preventDefault();
+            showSuccess('Redirecting to LinkedIn Sign-in...');
+            setTimeout(() => {
+                showError('LinkedIn Sign-in is not configured in this demo');
+            }, 1500);
+        });
+
+        // Remember Me functionality
+        window.addEventListener('load', function() {
+            const savedEmail = localStorage.getItem('rememberedEmail');
+            const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
+            
+            if (savedEmail && savedRememberMe) {
+                emailInput.value = savedEmail;
+                rememberMeCheckbox.checked = true;
+            }
+        });
+
+        // Mobile menu toggle (if needed)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                // Add mobile menu functionality if needed
+            });
+        }
+
+        // Fade-in animation
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const isVisible = (elementTop < window.innerHeight - 50) && (elementBottom > 0);
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('load', checkFade);
+        window.addEventListener('scroll', checkFade);
+
+        // Auto-focus on email input
+        window.addEventListener('load', function() {
+            if (!emailInput.value) {
+                emailInput.focus();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Escape key to clear form
+            if (e.key === 'Escape') {
+                emailInput.value = '';
+                passwordInput.value = '';
+                rememberMeCheckbox.checked = false;
+                
+                // Clear validation states
+                document.querySelectorAll('.form-input').forEach(input => {
+                    input.classList.remove('valid', 'invalid');
+                });
+                
+                document.querySelectorAll('.validation-message').forEach(msg => {
+                    msg.classList.remove('error', 'success');
+                });
+                
+                errorAlert.classList.remove('show');
+                successAlert.classList.remove('show');
+                
+                emailInput.focus();
+            }
+        });
+    </script>
+</body>
 </html>
