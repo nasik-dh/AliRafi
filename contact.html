@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Seazon AI</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <style>
+        /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.3s ease;
+    background: transparent;
+}
+header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo-icon {
+    font-size: 28px;
+    color: #27ae60;
+}
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    background: linear-gradient(135deg, #27ae60 0%, #13cc3e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Nav */
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+}
+nav a:hover { color: #4e54c8; }
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #4e54c8;
+    transition: width 0.3s;
+}
+nav a:hover::after { width: 100%; }
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+.auth-btn {
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.signin-btn {
+    background: transparent;
+    border: 2px solid #4e54c8;
+    color: #4e54c8;
+}
+.signin-btn:hover { background: rgba(78,84,200,0.1); }
+.signup-btn {
+    background: linear-gradient(135deg,#4e54c8 0%,#8f94fb 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(78,84,200,0.3);
+}
+.signup-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78,84,200,0.4);
+}
+
+/* Hero */
+.hero {
+    padding: 160px 0 100px;
+    text-align: center;
+}
+.hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #2c3e50 0%, #4e54c8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: #555;
+    line-height: 1.6;
+}
+.primary-btn, .secondary-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.primary-btn {
+    background: linear-gradient(135deg,#4e54c8 0%,#8f94fb 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(78,84,200,0.3);
+}
+.secondary-btn {
+    border: 2px solid #4e54c8;
+    color: #4e54c8;
+}
+.secondary-btn:hover { background: rgba(78,84,200,0.1); }
+
+/* Features Section */
+.features {
+    padding: 100px 0;
+    background: #fff;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 30px;
+}
+.feature-card {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s;
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#4e54c8 0%,#8f94fb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #fff;
+    font-size: 28px;
+}
+
+/* Footer */
+footer {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+footer a { color: #ccc; }
+
+    </style>
+  
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <i class="fas fa-leaf logo-icon"></i>
+        <span class="logo-text">Seazon AI</span>
+      </div>
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="solution.html">Solutions</a></li>
+          <li><a href="#"class="active">About</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="contact.html">Condact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="auth-buttons">
+        <a href="signin.html" class="auth-btn signin-btn">Sign In</a>
+        <a href="signup.html" class="auth-btn signup-btn">Sign Up</a>
+      </div>
+      <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>About <span style="color:#4e54c8;">Seazon AI</span></h1>
+      <p>At Seazon AI, we believe in building smarter solutions that transform businesses, empower people, and create a better tomorrow.</p>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Who We Are</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+          <h3>Innovation</h3>
+          <p>We thrive on innovation, developing AI solutions that help businesses stay ahead in a rapidly changing digital world.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon"><i class="fas fa-users"></i></div>
+          <h3>Our Team</h3>
+          <p>A diverse group of experts dedicated to combining technology with creativity to solve real-world challenges.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon"><i class="fas fa-globe"></i></div>
+          <h3>Our Vision</h3>
+          <p>To create AI-driven platforms that bring efficiency, intelligence, and accessibility to every corner of the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Seazon AI. All rights reserved.</p>
+    <p><a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="careers.html">Careers</a></p>
+  </footer>
+
+  <!-- Shared JS -->
+  <script src="script.js"></script>
+</body>
+</html>
