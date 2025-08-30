@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us - Seazon AI</title>
-
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Seazon AI</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <style>
-        /* Reset */
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -64,7 +61,7 @@ header.scrolled {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 24px;
-    background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+    background: linear-gradient(135deg,#4e54c8 0%, #8f94fb 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -211,64 +208,110 @@ footer {
     text-align: center;
 }
 footer a { color: #ccc; }
-
-    </style>
-  
+    
+    .contact-section {
+      padding: 140px 0 80px;
+      background: #fff;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      align-items: start;
+    }
+    .contact-info {
+      background: #f5f7fa;
+      border-radius: 15px;
+      padding: 30px;
+    }
+    .contact-info h3 {
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 20px;
+    }
+    .contact-info p {
+      margin-bottom: 15px;
+      color: #555;
+    }
+    .contact-form {
+      background: #f5f7fa;
+      border-radius: 15px;
+      padding: 30px;
+    }
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: 'Poppins', sans-serif;
+    }
+    .contact-form button {
+      background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .contact-form button:hover {
+      transform: translateY(-2px);
+    }
+    
+  </style>
+</head>
+<body>
   <!-- Header -->
   <header>
     <div class="container header-content">
       <div class="logo">
-        <i class="fas fa-leaf logo-icon"></i>
-        <span class="logo-text">Seazon AI</span>
+        <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+        <div class="logo-text">Seazon AI</div>
       </div>
-      <nav id="nav-menu">
-        <ul>
+      <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+      <nav>
+        <ul id="nav-menu">
           <li><a href="index.html">Home</a></li>
-          <li><a href="solution.html">Solutions</a></li>
+          <li><a href="solutions.html">Solutions</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="careers.html">Careers</a></li>
           <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="#"class="active">Condact</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#" class="active">Contact</a></li>
         </ul>
       </nav>
       <div class="auth-buttons">
-        <a href="signin.html" class="auth-btn signin-btn">Sign In</a>
-        <a href="signup.html" class="auth-btn signup-btn">Sign Up</a>
+        <a href="signin.html" class="auth-btn signin-btn"><i class="fas fa-user"></i> Sign In</a>
+        <a href="signup.html" class="auth-btn signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
       </div>
-      <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
+  <!-- Contact Section -->
+  <section class="contact-section">
     <div class="container">
-      <h1>About <span style="color:#4e54c8;">Seazon AI</span></h1>
-      <p>At Seazon AI, we believe in building smarter solutions that transform businesses, empower people, and create a better tomorrow.</p>
-    </div>
-  </section>
-
-  <!-- About Content -->
-  <section class="features">
-    <div class="container">
-      <div class="section-title">
-        <h2>Who We Are</h2>
+      <div class="section-title fade-in">
+        <h2>Get In Touch</h2>
+        <p>We’d love to hear from you! Reach out for any questions, feedback, or partnership opportunities.</p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card fade-in">
-          <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
-          <h3>Innovation</h3>
-          <p>We thrive on innovation, developing AI solutions that help businesses stay ahead in a rapidly changing digital world.</p>
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <h3>Contact Information</h3>
+          <p><i class="fas fa-envelope"></i> info@seazonai.com</p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <p><i class="fas fa-map-marker-alt"></i> 123 AI Boulevard, Tech City</p>
         </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon"><i class="fas fa-users"></i></div>
-          <h3>Our Team</h3>
-          <p>A diverse group of experts dedicated to combining technology with creativity to solve real-world challenges.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon"><i class="fas fa-globe"></i></div>
-          <h3>Our Vision</h3>
-          <p>To create AI-driven platforms that bring efficiency, intelligence, and accessibility to every corner of the world.</p>
+        <div class="contact-form fade-in">
+          <h3>Send Us a Message</h3>
+          <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+          </form>
         </div>
       </div>
     </div>
@@ -276,11 +319,13 @@ footer a { color: #ccc; }
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Seazon AI. All rights reserved.</p>
-    <p><a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="careers.html">Careers</a></p>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 Seazon AI. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
-
-
