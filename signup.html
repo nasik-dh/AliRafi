@@ -726,242 +726,336 @@
 
     <script src="server.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('signupForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const passwordInput = document.getElementById('password');
-            const confirmPasswordInput = document.getElementById('confirmPassword');
-            const passwordStrength = document.getElementById('passwordStrength');
-            const successModal = document.getElementById('successModal');
-
-            // Password strength checker
-            passwordInput.addEventListener('input', function() {
-                checkPasswordStrength(this.value);
-                validatePasswordRequirements(this.value);
-            });
-
-            // Confirm password validation
-            confirmPasswordInput.addEventListener('input', function() {
-                validatePasswordMatch();
-            });
-
-            // Real-time form validation
-            const inputs = form.querySelectorAll('input[required]');
-            inputs.forEach(input => {
-                input.addEventListener('blur', function() {
-                    validateField(this);
-                });
-
-                input.addEventListener('input', function() {
-                    clearFieldError(this);
-                });
-            });
-
-            // Form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (validateForm()) {
-                    submitForm();
-                }
-            });
-
-            function checkPasswordStrength(password) {
-                let strength = 0;
-                
-                if (password.length >= 8) strength += 1;
-                if (/[a-z]/.test(password)) strength += 1;
-                if (/[A-Z]/.test(password)) strength += 1;
-                if (/[0-9]/.test(password)) strength += 1;
-                if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-
-                passwordStrength.className = 'password-strength';
-                if (strength <= 2) {
-                    passwordStrength.classList.add('weak');
-                } else if (strength <= 4) {
-                    passwordStrength.classList.add('medium');
-                } else {
-                    passwordStrength.classList.add('strong');
-                }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get form elements
+        const signupForm = document.getElementById('signupForm');
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const termsCheckbox = document.getElementById('terms');
+        const submitBtn = document.getElementById('submitBtn');
+        const passwordToggle = document.getElementById('passwordToggle');
+        const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+        const successModal = document.getElementById('successModal');
+        
+        // Password requirements elements
+        const lengthRequirement = document.getElementById('length');
+        const uppercaseRequirement = document.getElementById('uppercase');
+        const lowercaseRequirement = document.getElementById('lowercase');
+        const numberRequirement = document.getElementById('number');
+        const specialRequirement = document.getElementById('special');
+        const passwordStrength = document.getElementById('passwordStrength');
+        
+        // Error message elements
+        const firstNameError = document.getElementById('firstNameError');
+        const lastNameError = document.getElementById('lastNameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        
+        // Toggle password visibility
+        function togglePasswordVisibility(input, toggleButton) {
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            
+            // Toggle eye icon
+            const eyeIcon = toggleButton.querySelector('i');
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        }
+        
+        // Add event listeners for password visibility toggle
+        passwordToggle.addEventListener('click', function() {
+            togglePasswordVisibility(passwordInput, passwordToggle);
+        });
+        
+        confirmPasswordToggle.addEventListener('click', function() {
+            togglePasswordVisibility(confirmPasswordInput, confirmPasswordToggle);
+        });
+        
+        // Check password strength
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            const requirements = {
+                hasLength: false,
+                hasUppercase: false,
+                hasLowercase: false,
+                hasNumber: false,
+                hasSpecial: false
+            };
+            
+            // Check length
+            if (password.length >= 8) {
+                strength += 20;
+                requirements.hasLength = true;
+                lengthRequirement.classList.remove('invalid');
+                lengthRequirement.classList.add('valid');
+                lengthRequirement.innerHTML = '<i class="fas fa-check"></i> At least 8 characters';
+            } else {
+                lengthRequirement.classList.remove('valid');
+                lengthRequirement.classList.add('invalid');
+                lengthRequirement.innerHTML = '<i class="fas fa-times"></i> At least 8 characters';
             }
-
-            function validatePasswordRequirements(password) {
-                const requirements = {
-                    length: password.length >= 8,
-                    uppercase: /[A-Z]/.test(password),
-                    lowercase: /[a-z]/.test(password),
-                    number: /[0-9]/.test(password),
-                    special: /[^A-Za-z0-9]/.test(password)
-                };
-
-                Object.keys(requirements).forEach(req => {
-                    const element = document.getElementById(req);
-                    const icon = element.querySelector('i');
-                    
-                    if (requirements[req]) {
-                        element.className = 'valid';
-                        icon.className = 'fas fa-check';
-                    } else {
-                        element.className = 'invalid';
-                        icon.className = 'fas fa-times';
-                    }
-                });
+            
+            // Check uppercase
+            if (/[A-Z]/.test(password)) {
+                strength += 20;
+                requirements.hasUppercase = true;
+                uppercaseRequirement.classList.remove('invalid');
+                uppercaseRequirement.classList.add('valid');
+                uppercaseRequirement.innerHTML = '<i class="fas fa-check"></i> One uppercase letter';
+            } else {
+                uppercaseRequirement.classList.remove('valid');
+                uppercaseRequirement.classList.add('invalid');
+                uppercaseRequirement.innerHTML = '<i class="fas fa-times"></i> One uppercase letter';
             }
-
-            function validatePasswordMatch() {
-                const password = passwordInput.value;
-                const confirmPassword = confirmPasswordInput.value;
-                const errorElement = document.getElementById('confirmPasswordError');
-                
-                if (confirmPassword && password !== confirmPassword) {
-                    showFieldError(confirmPasswordInput, 'Passwords do not match');
-                    return false;
-                } else if (confirmPassword) {
-                    showFieldSuccess(confirmPasswordInput);
-                    return true;
-                }
+            
+            // Check lowercase
+            if (/[a-z]/.test(password)) {
+                strength += 20;
+                requirements.hasLowercase = true;
+                lowercaseRequirement.classList.remove('invalid');
+                lowercaseRequirement.classList.add('valid');
+                lowercaseRequirement.innerHTML = '<i class="fas fa-check"></i> One lowercase letter';
+            } else {
+                lowercaseRequirement.classList.remove('valid');
+                lowercaseRequirement.classList.add('invalid');
+                lowercaseRequirement.innerHTML = '<i class="fas fa-times"></i> One lowercase letter';
+            }
+            
+            // Check number
+            if (/[0-9]/.test(password)) {
+                strength += 20;
+                requirements.hasNumber = true;
+                numberRequirement.classList.remove('invalid');
+                numberRequirement.classList.add('valid');
+                numberRequirement.innerHTML = '<i class="fas fa-check"></i> One number';
+            } else {
+                numberRequirement.classList.remove('valid');
+                numberRequirement.classList.add('invalid');
+                numberRequirement.innerHTML = '<i class="fas fa-times"></i> One number';
+            }
+            
+            // Check special character
+            if (/[^A-Za-z0-9]/.test(password)) {
+                strength += 20;
+                requirements.hasSpecial = true;
+                specialRequirement.classList.remove('invalid');
+                specialRequirement.classList.add('valid');
+                specialRequirement.innerHTML = '<i class="fas fa-check"></i> One special character';
+            } else {
+                specialRequirement.classList.remove('valid');
+                specialRequirement.classList.add('invalid');
+                specialRequirement.innerHTML = '<i class="fas fa-times"></i> One special character';
+            }
+            
+            // Update password strength indicator
+            const strengthBar = passwordStrength.querySelector('.password-strength-bar');
+            passwordStrength.className = 'password-strength';
+            
+            if (strength <= 40) {
+                passwordStrength.classList.add('weak');
+            } else if (strength <= 80) {
+                passwordStrength.classList.add('medium');
+            } else {
+                passwordStrength.classList.add('strong');
+            }
+            
+            return requirements;
+        }
+        
+        // Validate name field
+        function validateName(name, errorElement) {
+            if (!name.trim()) {
+                errorElement.textContent = 'This field is required';
+                return false;
+            } else if (name.length < 2) {
+                errorElement.textContent = 'Name must be at least 2 characters';
+                return false;
+            } else if (!/^[a-zA-Z\s-']+$/.test(name)) {
+                errorElement.textContent = 'Name can only contain letters, spaces, hyphens, and apostrophes';
+                return false;
+            } else {
+                errorElement.textContent = '';
                 return true;
             }
-
-            function validateField(field) {
-                const value = field.value.trim();
-                
-                if (field.hasAttribute('required') && !value) {
-                    showFieldError(field, 'This field is required');
-                    return false;
-                }
-
-                if (field.type === 'email' && value) {
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(value)) {
-                        showFieldError(field, 'Please enter a valid email address');
-                        return false;
-                    }
-                }
-
-                if (field.id === 'password' && value) {
-                    const requirements = {
-                        length: value.length >= 8,
-                        uppercase: /[A-Z]/.test(value),
-                        lowercase: /[a-z]/.test(value),
-                        number: /[0-9]/.test(value),
-                        special: /[^A-Za-z0-9]/.test(value)
-                    };
-                    
-                    const isValid = Object.values(requirements).every(req => req);
-                    if (!isValid) {
-                        showFieldError(field, 'Password does not meet requirements');
-                        return false;
-                    }
-                }
-
-                if (field.id === 'confirmPassword' && value) {
-                    return validatePasswordMatch();
-                }
-
-                showFieldSuccess(field);
+        }
+        
+        // Validate email field
+        function validateEmail(email, errorElement) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!email.trim()) {
+                errorElement.textContent = 'Email is required';
+                return false;
+            } else if (!emailRegex.test(email)) {
+                errorElement.textContent = 'Please enter a valid email address';
+                return false;
+            } else {
+                errorElement.textContent = '';
                 return true;
             }
-
-            function showFieldError(field, message) {
-                field.classList.add('error');
-                field.classList.remove('success');
+        }
+        
+        // Validate password field
+        function validatePassword(password, errorElement) {
+            if (!password) {
+                errorElement.textContent = 'Password is required';
+                return false;
+            }
+            
+            const requirements = checkPasswordStrength(password);
+            
+            if (!requirements.hasLength || !requirements.hasUppercase || 
+                !requirements.hasLowercase || !requirements.hasNumber || 
+                !requirements.hasSpecial) {
+                errorElement.textContent = 'Password does not meet all requirements';
+                return false;
+            } else {
+                errorElement.textContent = '';
+                return true;
+            }
+        }
+        
+        // Validate confirm password field
+        function validateConfirmPassword(password, confirmPassword, errorElement) {
+            if (!confirmPassword) {
+                errorElement.textContent = 'Please confirm your password';
+                return false;
+            } else if (password !== confirmPassword) {
+                errorElement.textContent = 'Passwords do not match';
+                return false;
+            } else {
+                errorElement.textContent = '';
+                return true;
+            }
+        }
+        
+        // Validate terms agreement
+        function validateTerms(termsChecked, errorElement) {
+            if (!termsChecked) {
+                errorElement.textContent = 'You must agree to the terms and conditions';
+                return false;
+            } else {
+                errorElement.textContent = '';
+                return true;
+            }
+        }
+        
+        // Real-time validation
+        firstNameInput.addEventListener('blur', function() {
+            validateName(firstNameInput.value, firstNameError);
+        });
+        
+        lastNameInput.addEventListener('blur', function() {
+            validateName(lastNameInput.value, lastNameError);
+        });
+        
+        emailInput.addEventListener('blur', function() {
+            validateEmail(emailInput.value, emailError);
+        });
+        
+        passwordInput.addEventListener('input', function() {
+            checkPasswordStrength(passwordInput.value);
+            
+            // Also validate confirm password when password changes
+            if (confirmPasswordInput.value) {
+                validateConfirmPassword(passwordInput.value, confirmPasswordInput.value, confirmPasswordError);
+            }
+        });
+        
+        confirmPasswordInput.addEventListener('blur', function() {
+            validateConfirmPassword(passwordInput.value, confirmPasswordInput.value, confirmPasswordError);
+        });
+        
+        // Form submission
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all fields
+            const isFirstNameValid = validateName(firstNameInput.value, firstNameError);
+            const isLastNameValid = validateName(lastNameInput.value, lastNameError);
+            const isEmailValid = validateEmail(emailInput.value, emailError);
+            const isPasswordValid = validatePassword(passwordInput.value, passwordError);
+            const isConfirmPasswordValid = validateConfirmPassword(
+                passwordInput.value, 
+                confirmPasswordInput.value, 
+                confirmPasswordError
+            );
+            const isTermsValid = validateTerms(termsCheckbox.checked, document.createElement('div'));
+            
+            // If all valid, submit the form
+            if (isFirstNameValid && isLastNameValid && isEmailValid && 
+                isPasswordValid && isConfirmPasswordValid && isTermsValid) {
                 
-                const errorId = field.id + 'Error';
-                const errorElement = document.getElementById(errorId);
-                if (errorElement) {
-                    errorElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-                }
-            }
-
-            function showFieldSuccess(field) {
-                field.classList.remove('error');
-                field.classList.add('success');
-                
-                const errorId = field.id + 'Error';
-                const errorElement = document.getElementById(errorId);
-                if (errorElement) {
-                    errorElement.innerHTML = '';
-                }
-            }
-
-            function clearFieldError(field) {
-                field.classList.remove('error');
-                const errorId = field.id + 'Error';
-                const errorElement = document.getElementById(errorId);
-                if (errorElement) {
-                    errorElement.innerHTML = '';
-                }
-            }
-
-            function validateForm() {
-                let isValid = true;
-                
-                inputs.forEach(input => {
-                    if (!validateField(input)) {
-                        isValid = false;
-                    }
-                });
-
-                const termsCheckbox = document.getElementById('terms');
-                if (!termsCheckbox.checked) {
-                    alert('Please agree to the Terms of Service and Privacy Policy');
-                    isValid = false;
-                }
-
-                return isValid;
-            }
-
-            function submitForm() {
+                // Show loading state
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
-
-                // Simulate API call
+                
+                // Simulate API call (replace with actual API call)
                 setTimeout(() => {
+                    // Hide loading state
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
+                    
+                    // Show success modal
                     successModal.style.display = 'block';
-                }, 2000);
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Reset form
+                    signupForm.reset();
+                    passwordStrength.className = 'password-strength';
+                    
+                    // Reset password requirements
+                    const requirements = document.querySelectorAll('.password-requirements li');
+                    requirements.forEach(req => {
+                        req.classList.remove('valid');
+                        req.classList.add('invalid');
+                        req.innerHTML = req.innerHTML.replace('fa-check', 'fa-times').replace('check', 'times');
+                    });
+                    
+                }, 1500);
             }
-
-            // Social login handlers
-            document.querySelectorAll('.social-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const provider = this.textContent.trim();
-                    console.log(`${provider} sign-up clicked`);
-                    // Implement actual social login here
-                });
-            });
         });
-
-        function closeModal() {
-            const modal = document.getElementById('successModal');
-            modal.style.display = 'none';
-            // Redirect to sign-in page or dashboard
-            window.location.href = 'signin.html';
+        
+        // Social signup buttons
+        document.getElementById('googleSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Google signup would be implemented here');
+        });
+        
+        document.getElementById('githubSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('GitHub signup would be implemented here');
+        });
+    });
+    
+    // Close modal function
+    function closeModal() {
+        document.getElementById('successModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+        const modal = document.getElementById('successModal');
+        if (e.target === modal) {
+            closeModal();
         }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            const modal = document.getElementById('successModal');
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-    </script>
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+</script>
 </body>
 </html>
+
 
 
 
