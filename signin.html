@@ -821,291 +821,232 @@
     </footer>
 
     <script>
-        // DOM Elements
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get DOM elements
         const signinForm = document.getElementById('signinForm');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const passwordToggle = document.getElementById('passwordToggle');
+        const rememberMe = document.getElementById('rememberMe');
         const signinButton = document.getElementById('signinButton');
         const buttonText = document.getElementById('buttonText');
         const loadingSpinner = document.getElementById('loadingSpinner');
         const errorAlert = document.getElementById('errorAlert');
+        const errorMessage = document.getElementById('errorMessage');
         const successAlert = document.getElementById('successAlert');
+        const successMessage = document.getElementById('successMessage');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const googleSignin = document.getElementById('googleSignin');
+        const linkedinSignin = document.getElementById('linkedinSignin');
         const forgotPassword = document.getElementById('forgotPassword');
-        const rememberMeCheckbox = document.getElementById('rememberMe');
-
-        // Validation Functions
-        function validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+        
+        // Check if there are saved credentials
+        const savedEmail = localStorage.getItem('seazon-remember-email');
+        const savedPassword = localStorage.getItem('seazon-remember-password');
+        
+        if (savedEmail && savedPassword) {
+            emailInput.value = savedEmail;
+            passwordInput.value = savedPassword;
+            rememberMe.checked = true;
         }
-
-        function validatePassword(password) {
-            return password.length >= 6;
-        }
-
-        // Show/Hide Alerts
-        function showError(message) {
-            document.getElementById('errorMessage').textContent = message;
-            errorAlert.classList.add('show');
-            successAlert.classList.remove('show');
-            setTimeout(() => errorAlert.classList.remove('show'), 5000);
-        }
-
-        function showSuccess(message) {
-            document.getElementById('successMessage').textContent = message;
-            successAlert.classList.add('show');
-            errorAlert.classList.remove('show');
-        }
-
-        // Field Validation
-        function validateField(input, validationFn, errorElementId, errorMsg, successMsg) {
-            const value = input.value.trim();
-            const errorElement = document.getElementById(errorElementId);
-            
-            if (value === '') {
-                input.classList.remove('valid', 'invalid');
-                errorElement.classList.remove('error', 'success');
-                return false;
-            }
-            
-            if (validationFn(value)) {
-                input.classList.remove('invalid');
-                input.classList.add('valid');
-                errorElement.textContent = successMsg;
-                errorElement.classList.remove('error');
-                errorElement.classList.add('success');
-                return true;
-            } else {
-                input.classList.remove('valid');
-                input.classList.add('invalid');
-                errorElement.textContent = errorMsg;
-                errorElement.classList.remove('success');
-                errorElement.classList.add('error');
-                return false;
-            }
-        }
-
-        // Password Toggle
+        
+        // Toggle password visibility
         passwordToggle.addEventListener('click', function() {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
             
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
+            // Toggle eye icon
+            const eyeIcon = passwordToggle.querySelector('i');
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
         });
-
-        // Real-time Validation
-        emailInput.addEventListener('blur', function() {
-            validateField(
-                this,
-                validateEmail,
-                'emailError',
-                'Please enter a valid email address',
-                'Valid email address'
-            );
-        });
-
-        passwordInput.addEventListener('blur', function() {
-            validateField(
-                this,
-                validatePassword,
-                'passwordError',
-                'Password must be at least 6 characters long',
-                'Password looks good'
-            );
-        });
-
-        // Clear validation on focus
-        [emailInput, passwordInput].forEach(input => {
-            input.addEventListener('focus', function() {
-                this.classList.remove('valid', 'invalid');
-                const errorId = this.id + 'Error';
-                document.getElementById(errorId).classList.remove('error', 'success');
-            });
-        });
-
-        // Form Submission
-        signinForm.addEventListener('submit', async function(e) {
+        
+        // Validate email format
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Validate form inputs
+        function validateForm() {
+            let isValid = true;
+            
+            // Reset validation states
+            emailInput.classList.remove('invalid', 'valid');
+            passwordInput.classList.remove('invalid', 'valid');
+            emailError.classList.remove('error', 'success');
+            passwordError.classList.remove('error', 'success');
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            
+            // Validate email
+            if (!emailInput.value.trim()) {
+                emailInput.classList.add('invalid');
+                emailError.classList.add('error');
+                emailError.textContent = 'Email is required';
+                isValid = false;
+            } else if (!validateEmail(emailInput.value)) {
+                emailInput.classList.add('invalid');
+                emailError.classList.add('error');
+                emailError.textContent = 'Please enter a valid email address';
+                isValid = false;
+            } else {
+                emailInput.classList.add('valid');
+            }
+            
+            // Validate password
+            if (!passwordInput.value) {
+                passwordInput.classList.add('invalid');
+                passwordError.classList.add('error');
+                passwordError.textContent = 'Password is required';
+                isValid = false;
+            } else if (passwordInput.value.length < 6) {
+                passwordInput.classList.add('invalid');
+                passwordError.classList.add('error');
+                passwordError.textContent = 'Password must be at least 6 characters';
+                isValid = false;
+            } else {
+                passwordInput.classList.add('valid');
+            }
+            
+            return isValid;
+        }
+        
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorAlert.classList.add('show');
+            successAlert.classList.remove('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorAlert.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Show success message
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successAlert.classList.add('show');
+            errorAlert.classList.remove('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                successAlert.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Handle form submission
+        signinForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            
-            // Validate all fields
-            const isEmailValid = validateField(
-                emailInput,
-                validateEmail,
-                'emailError',
-                'Please enter a valid email address',
-                'Valid email address'
-            );
-            
-            const isPasswordValid = validateField(
-                passwordInput,
-                validatePassword,
-                'passwordError',
-                'Password must be at least 6 characters long',
-                'Password looks good'
-            );
-            
-            if (!email || !password) {
-                showError('Please fill in all required fields');
-                return;
-            }
-            
-            if (!isEmailValid || !isPasswordValid) {
-                showError('Please correct the errors above');
-                return;
-            }
+            // Validate form
+            if (!validateForm()) return;
             
             // Show loading state
-            signinButton.disabled = true;
             buttonText.style.display = 'none';
             loadingSpinner.style.display = 'block';
+            signinButton.disabled = true;
             
-            // Simulate API call
-            try {
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                // Demo credentials check
-                if (email === 'demo@seazonai.com' && password === 'demo123') {
-                    showSuccess('Sign in successful! Redirecting to dashboard...');
+            // Save credentials if "Remember me" is checked
+            if (rememberMe.checked) {
+                localStorage.setItem('seazon-remember-email', emailInput.value);
+                localStorage.setItem('seazon-remember-password', passwordInput.value);
+            } else {
+                localStorage.removeItem('seazon-remember-email');
+                localStorage.removeItem('seazon-remember-password');
+            }
+            
+            // Simulate API call (replace with actual authentication)
+            setTimeout(() => {
+                // For demo purposes, accept any valid email and password "password123"
+                if (passwordInput.value === 'password123') {
+                    showSuccess('Login successful! Redirecting to dashboard...');
                     
-                    // Save credentials if remember me is checked
-                    if (rememberMeCheckbox.checked) {
-                        localStorage.setItem('rememberedEmail', email);
-                        localStorage.setItem('rememberMe', 'true');
-                    } else {
-                        localStorage.removeItem('rememberedEmail');
-                        localStorage.removeItem('rememberMe');
-                    }
-                    
-                    // Simulate redirect
+                    // Redirect to dashboard after a brief delay
                     setTimeout(() => {
-                        window.location.href = 'index.html'; // Change to dashboard.html when available
-                    }, 2000);
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
                 } else {
-                    showError('Invalid email or password. Try demo@seazonai.com / demo123 for demo');
+                    showError('Invalid email or password. Please try again.');
+                    
+                    // Reset loading state
+                    buttonText.style.display = 'block';
+                    loadingSpinner.style.display = 'none';
+                    signinButton.disabled = false;
                 }
-            } catch (error) {
-                showError('Something went wrong. Please try again.');
-            } finally {
-                // Reset button state
-                signinButton.disabled = false;
-                buttonText.style.display = 'block';
-                loadingSpinner.style.display = 'none';
+            }, 1500);
+        });
+        
+        // Real-time validation
+        emailInput.addEventListener('blur', function() {
+            if (emailInput.value.trim()) {
+                if (!validateEmail(emailInput.value)) {
+                    emailInput.classList.add('invalid');
+                    emailError.classList.add('error');
+                    emailError.textContent = 'Please enter a valid email address';
+                } else {
+                    emailInput.classList.remove('invalid');
+                    emailInput.classList.add('valid');
+                    emailError.textContent = '';
+                }
             }
         });
-
-        // Forgot Password
+        
+        passwordInput.addEventListener('blur', function() {
+            if (passwordInput.value) {
+                if (passwordInput.value.length < 6) {
+                    passwordInput.classList.add('invalid');
+                    passwordError.classList.add('error');
+                    passwordError.textContent = 'Password must be at least 6 characters';
+                } else {
+                    passwordInput.classList.remove('invalid');
+                    passwordInput.classList.add('valid');
+                    passwordError.textContent = '';
+                }
+            }
+        });
+        
+        // Social sign-in handlers
+        googleSignin.addEventListener('click', function(e) {
+            e.preventDefault();
+            showError('Google sign-in is temporarily unavailable. Please use email sign-in.');
+        });
+        
+        linkedinSignin.addEventListener('click', function(e) {
+            e.preventDefault();
+            showError('LinkedIn sign-in is temporarily unavailable. Please use email sign-in.');
+        });
+        
+        // Forgot password handler
         forgotPassword.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            const email = emailInput.value.trim();
-            if (!email) {
-                showError('Please enter your email address first');
-                emailInput.focus();
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                showError('Please enter a valid email address');
-                emailInput.focus();
-                return;
-            }
-            
-            showSuccess('Password reset link has been sent to your email address');
+            showError('Password reset functionality is coming soon. Please contact support for assistance.');
         });
-
-        // Social Sign-in (Demo)
-        document.getElementById('googleSignin').addEventListener('click', function(e) {
-            e.preventDefault();
-            showSuccess('Redirecting to Google Sign-in...');
-            setTimeout(() => {
-                showError('Google Sign-in is not configured in this demo');
-            }, 1500);
-        });
-
-        document.getElementById('linkedinSignin').addEventListener('click', function(e) {
-            e.preventDefault();
-            showSuccess('Redirecting to LinkedIn Sign-in...');
-            setTimeout(() => {
-                showError('LinkedIn Sign-in is not configured in this demo');
-            }, 1500);
-        });
-
-        // Remember Me functionality
-        window.addEventListener('load', function() {
-            const savedEmail = localStorage.getItem('rememberedEmail');
-            const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
-            
-            if (savedEmail && savedRememberMe) {
-                emailInput.value = savedEmail;
-                rememberMeCheckbox.checked = true;
-            }
-        });
-
-        // Mobile menu toggle (if needed)
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function() {
-                // Add mobile menu functionality if needed
-            });
-        }
-
-        // Fade-in animation
+        
+        // Add fade-in animation for elements
         function checkFade() {
             const fadeElements = document.querySelectorAll('.fade-in');
+            
             fadeElements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
-                const elementBottom = element.getBoundingClientRect().bottom;
-                const isVisible = (elementTop < window.innerHeight - 50) && (elementBottom > 0);
+                const elementVisible = 150;
                 
-                if (isVisible) {
+                if (elementTop < window.innerHeight - elementVisible) {
                     element.classList.add('visible');
                 }
             });
         }
-
-        // Initialize animations
-        window.addEventListener('load', checkFade);
+        
+        // Initial check and add scroll listener
+        checkFade();
         window.addEventListener('scroll', checkFade);
-
-        // Auto-focus on email input
-        window.addEventListener('load', function() {
-            if (!emailInput.value) {
-                emailInput.focus();
-            }
-        });
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Escape key to clear form
-            if (e.key === 'Escape') {
-                emailInput.value = '';
-                passwordInput.value = '';
-                rememberMeCheckbox.checked = false;
-                
-                // Clear validation states
-                document.querySelectorAll('.form-input').forEach(input => {
-                    input.classList.remove('valid', 'invalid');
-                });
-                
-                document.querySelectorAll('.validation-message').forEach(msg => {
-                    msg.classList.remove('error', 'success');
-                });
-                
-                errorAlert.classList.remove('show');
-                successAlert.classList.remove('show');
-                
-                emailInput.focus();
-            }
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
+
 
 
 
