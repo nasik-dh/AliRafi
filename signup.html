@@ -6,7 +6,6 @@
     <title>Sign Up - Seazon AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="logo.png">
     <style>
         * {
             margin: 0;
@@ -581,7 +580,6 @@
         </div>
     </header>
 
-
     <!-- Sign Up Section -->
     <section class="signup-section">
         <div class="container">
@@ -627,10 +625,12 @@
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
                                 <input type="text" id="firstName" name="firstName" required aria-describedby="firstNameError">
+                                <div class="error-message" id="firstNameError" role="alert"></div>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label>
                                 <input type="text" id="lastName" name="lastName" required aria-describedby="lastNameError">
+                                <div class="error-message" id="lastNameError" role="alert"></div>
                             </div>
                         </div>
 
@@ -648,6 +648,9 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" required aria-describedby="passwordError passwordRequirements">
+                            <span class="password-toggle" id="passwordToggle">
+                                <i class="far fa-eye"></i>
+                            </span>
                             <div class="password-strength" id="passwordStrength">
                                 <div class="password-strength-bar"></div>
                             </div>
@@ -658,6 +661,7 @@
                                     <li class="invalid" id="uppercase"><i class="fas fa-times"></i> One uppercase letter</li>
                                     <li class="invalid" id="lowercase"><i class="fas fa-times"></i> One lowercase letter</li>
                                     <li class="invalid" id="number"><i class="fas fa-times"></i> One number</li>
+                                    <li class="invalid" id="special"><i class="fas fa-times"></i> One special character</li>
                                 </ul>
                             </div>
                             <div class="error-message" id="passwordError" role="alert"></div>
@@ -666,6 +670,9 @@
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password</label>
                             <input type="password" id="confirmPassword" name="confirmPassword" required aria-describedby="confirmPasswordError">
+                            <span class="password-toggle" id="confirmPasswordToggle">
+                                <i class="far fa-eye"></i>
+                            </span>
                             <div class="error-message" id="confirmPasswordError" role="alert"></div>
                         </div>
 
@@ -694,11 +701,11 @@
                     </div>
 
                     <div class="social-signup">
-                        <a href="#" class="social-btn" aria-label="Sign up with Google">
+                        <a href=https://accounts.google.com/o/oauth2/auth?trampoline" class="social-btn" id="googleSignup" aria-label="Sign up with Google">
                             <i class="fab fa-google"></i>
                             Google
                         </a>
-                        <a href="#" class="social-btn" aria-label="Sign up with GitHub">
+                        <a href="#" class="social-btn" id="githubSignup" aria-label="Sign up with GitHub">
                             <i class="fab fa-github"></i>
                             GitHub
                         </a>
@@ -724,8 +731,7 @@
         </div>
     </div>
 
-    <script src="server.js"></script>
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         // Get form elements
         const signupForm = document.getElementById('signupForm');
@@ -1055,8 +1061,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
