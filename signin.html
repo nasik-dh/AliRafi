@@ -6,8 +6,7 @@
     <title>Seazon AI - Sign In</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="logo.png">
-    <style>
+   <style>
         * {
             margin: 0;
             padding: 0;
@@ -54,14 +53,14 @@
 
         .logo-icon {
             font-size: 28px;
-            color: #4e54c8;
+            color: #27ae60;
         }
 
         .logo-text {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 24px;
-            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            background: linear-gradient(135deg, #27ae60 0%, #16b458 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -231,7 +230,9 @@
         }
 
         .alert.show {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .alert-error {
@@ -743,7 +744,7 @@
                                 <input type="checkbox" id="rememberMe" name="rememberMe">
                                 <span>Remember me</span>
                             </label>
-                            <a href="#" class="forgot-password" id="forgotPassword">Forgot Password?</a>
+                            <a href="forgot-password.html" class="forgot-password" id="forgotPassword">Forgot Password?</a>
                         </div>
 
                         <button type="submit" class="signin-btn" id="signinButton">
@@ -820,7 +821,7 @@
         </div>
     </footer>
 
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         // Get DOM elements
         const signinForm = document.getElementById('signinForm');
@@ -1046,7 +1047,3 @@
 </script>
 </body>
 </html>
-
-
-
-
